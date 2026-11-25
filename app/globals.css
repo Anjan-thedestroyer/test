@@ -135,3 +135,10 @@ body {
   position: relative;
   margin-left: var(--slide-spacing);
 }
+html:not(.dark) .text-white {
+  color: #111827 !important;
+}
+
+html:not(.dark) [class*="text-white/"] {
+  color: #111827 !important;
+}

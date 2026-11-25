@@ -63,8 +63,8 @@ export default {
         },
         // Surface tones (page backgrounds)
         surface: {
-          base: '#0B1120',
-          elevated: '#0E172A',
+          base: 'hsl(var(--background))',
+          elevated: 'hsl(var(--card))',
         },
       },
       fontFamily: {

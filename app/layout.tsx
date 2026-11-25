@@ -1,9 +1,11 @@
+
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { AuthProvider } from '@/providers/auth-provider'
 import { ToastProvider } from '@/providers/toast-provider'
 import { WalletProvider } from '@/providers/wallet-provider'
+import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Footer } from '@/components/blocks/footer'
 import { Navbar } from '@/components/navigation/navbar'
 
@@ -12,6 +14,7 @@ const geistSans = localFont({
   variable: '--font-geist-sans',
   weight: '100 900',
 })
+
 const geistMono = localFont({
   src: '../public/fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
@@ -33,19 +36,26 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-surface-base min-h-screen pt-[68px]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen pt-[68px]`}
       >
-        <ToastProvider>
-          <AuthProvider>
-            <WalletProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </WalletProvider>
-          </AuthProvider>
-        </ToastProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <ToastProvider>
+            <AuthProvider>
+              <WalletProvider>
+                <Navbar />
+                {children}
+                <Footer />
+              </WalletProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
